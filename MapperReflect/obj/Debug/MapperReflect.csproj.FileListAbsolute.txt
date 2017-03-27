@@ -3,3 +3,4 @@ C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperRefl
 C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflect\bin\Debug\MapperReflect.pdb
 C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflect\obj\Debug\MapperReflect.dll
 C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflect\obj\Debug\MapperReflect.pdb
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflect\obj\Debug\MapperReflect.csprojResolveAssemblyReference.cache

@@ -11,13 +11,15 @@ namespace MapperReflect
     {
         private Type src;
         private Type dst;
-        private FieldInfo srcpropertie;
+        private PropertyInfo[] srcPropertie, dstPropertie;
         public Mapper(Type klassSrc, Type klassDest)
         {
             src = klassSrc;
             dst = klassDest;
-            //srcpropertie = klassSrc.GetProperties(BindingFlags.NonPublic|BindingFlags.Public);
-            
+            srcPropertie = klassSrc.GetProperties();
+            dstPropertie = klassDest.GetProperties();
+
+
         }
 
         public object[] Map(object[] src)
@@ -27,7 +29,22 @@ namespace MapperReflect
 
         public object Map(object src)
         {
-            throw new NotImplementedException();
+            object ret = Activator.CreateInstance(dst);
+            FieldInfo[] f= src.GetType().GetFields(BindingFlags.Public|BindingFlags.Instance|BindingFlags.NonPublic);
+            FieldInfo[] d = ret.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+            for (int i = 0; i< f.Length; i++)    
+            {
+                for (int k = 0; k < d.Length; k++)
+                {
+                    if (f[i].FieldType.Equals(d[k].FieldType))
+                    {
+                        if(f[i].Name.Equals(d[k].Name))
+                            d[i].SetValue(ret, f[i].GetValue(src));
+                        
+                    }
+                }
+            }
+            return ret;     
         }
 
         public Mapper Bind(Mapping m)
@@ -37,6 +54,13 @@ namespace MapperReflect
 
         public Mapper Match(string nameFrom,string nameDest)
         {
+            for(int i = 0;i< srcPropertie.Length; i++)
+            {
+                if (srcPropertie[i].Name.Equals(nameFrom))
+                {
+                   // srcPropertie[i].Name = nameDest;
+                }
+            }
             return null;
         }
     }
