@@ -1,0 +1,16 @@
+c:\users\gonca\onedrive\documentos\visual studio 2015\Projects\MapperReflectTests\MapperReflectTests\bin\Debug\MapperReflectTests.exe.config
+c:\users\gonca\onedrive\documentos\visual studio 2015\Projects\MapperReflectTests\MapperReflectTests\bin\Debug\MapperReflectTests.exe
+c:\users\gonca\onedrive\documentos\visual studio 2015\Projects\MapperReflectTests\MapperReflectTests\bin\Debug\MapperReflectTests.pdb
+c:\users\gonca\onedrive\documentos\visual studio 2015\Projects\MapperReflectTests\MapperReflectTests\obj\Debug\MapperReflectTests.csprojResolveAssemblyReference.cache
+c:\users\gonca\onedrive\documentos\visual studio 2015\Projects\MapperReflectTests\MapperReflectTests\obj\Debug\MapperReflectTests.exe
+c:\users\gonca\onedrive\documentos\visual studio 2015\Projects\MapperReflectTests\MapperReflectTests\obj\Debug\MapperReflectTests.pdb
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\obj\Debug\MapperReflectTests.csprojResolveAssemblyReference.cache
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\obj\Debug\MapperReflectTests.pdb
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\bin\Debug\MapperReflectTests.dll.config
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\bin\Debug\MapperReflectTests.dll
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\bin\Debug\MapperReflectTests.pdb
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\bin\Debug\MapperReflect.dll
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\bin\Debug\nunit.framework.dll
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\bin\Debug\MapperReflect.pdb
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\bin\Debug\nunit.framework.xml
+C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\obj\Debug\MapperReflectTests.dll
