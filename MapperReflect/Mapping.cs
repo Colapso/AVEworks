@@ -3,15 +3,8 @@ using System.Reflection;
 
 namespace MapperReflect
 {
-    public class Mapping
+    public interface Mapping
     {
-        FieldInfo[] Fields;
-        PropertyInfo[] Properties;
         
-        public Mapping(Type t)
-        {
-            Fields = t.GetFields();
-            Properties = t.GetProperties();
-        }
     }
 }

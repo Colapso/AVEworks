@@ -14,3 +14,13 @@ C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperRefl
 C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\bin\Debug\MapperReflect.pdb
 C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\bin\Debug\nunit.framework.xml
 C:\Users\gonca\OneDrive\Documentos\Visual Studio 2015\Projects\Serie1\MapperReflectTests\obj\Debug\MapperReflectTests.dll
+C:\Users\gonca\Desktop\Serie1\MapperReflectTests\bin\Debug\MapperReflectTests.dll.config
+C:\Users\gonca\Desktop\Serie1\MapperReflectTests\bin\Debug\MapperReflectTests.dll
+C:\Users\gonca\Desktop\Serie1\MapperReflectTests\bin\Debug\MapperReflectTests.pdb
+C:\Users\gonca\Desktop\Serie1\MapperReflectTests\bin\Debug\MapperReflect.dll
+C:\Users\gonca\Desktop\Serie1\MapperReflectTests\bin\Debug\nunit.framework.dll
+C:\Users\gonca\Desktop\Serie1\MapperReflectTests\bin\Debug\MapperReflect.pdb
+C:\Users\gonca\Desktop\Serie1\MapperReflectTests\bin\Debug\nunit.framework.xml
+C:\Users\gonca\Desktop\Serie1\MapperReflectTests\obj\Debug\MapperReflectTests.csprojResolveAssemblyReference.cache
+C:\Users\gonca\Desktop\Serie1\MapperReflectTests\obj\Debug\MapperReflectTests.dll
+C:\Users\gonca\Desktop\Serie1\MapperReflectTests\obj\Debug\MapperReflectTests.pdb

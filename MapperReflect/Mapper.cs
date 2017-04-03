@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -9,41 +10,25 @@ namespace MapperReflect
 {
     public class Mapper : IMapper
     {
-        private Type src;
-        private Type dst;
-        private PropertyInfo[] srcPropertie, dstPropertie;
+       
+        MixedIfo fieldInfoandPropertiesOfSrcDst;            //instance to add to map
+        Dictionary<String,MixedIfo> map = new Dictionary<String,MixedIfo>(); //map key = type of soucer
+
         public Mapper(Type klassSrc, Type klassDest)
         {
-            src = klassSrc;
-            dst = klassDest;
-            srcPropertie = klassSrc.GetProperties();
-            dstPropertie = klassDest.GetProperties();
-
-
+            fieldInfoandPropertiesOfSrcDst = new MixedIfo(klassSrc, klassDest);
+            map.Add(klassSrc.Name,fieldInfoandPropertiesOfSrcDst);
         }
 
         public object[] Map(object[] src)
         {
             throw new NotImplementedException();
         }
-
+        
         public object Map(object src)
         {
-            object ret = Activator.CreateInstance(dst);
-            FieldInfo[] f= src.GetType().GetFields(BindingFlags.Public|BindingFlags.Instance|BindingFlags.NonPublic);
-            FieldInfo[] d = ret.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-            for (int i = 0; i< f.Length; i++)    
-            {
-                for (int k = 0; k < d.Length; k++)
-                {
-                    if (f[i].FieldType.Equals(d[k].FieldType))
-                    {
-                        if(f[i].Name.Equals(d[k].Name))
-                            d[i].SetValue(ret, f[i].GetValue(src));
-                        
-                    }
-                }
-            }
+            MixedIfo aux = map[src.GetType().Name];                 //get the name of srcObject, thats the key;
+            object ret = aux.MapField(src);
             return ret;     
         }
 
@@ -53,14 +38,11 @@ namespace MapperReflect
         }
 
         public Mapper Match(string nameFrom,string nameDest)
-        {
-            for(int i = 0;i< srcPropertie.Length; i++)
-            {
-                if (srcPropertie[i].Name.Equals(nameFrom))
-                {
-                   // srcPropertie[i].Name = nameDest;
-                }
-            }
+        {   
+           /* FieldInfo argumentFrom = src.GetField(nameFrom, BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo argumentTo = dst.GetField(nameDest, BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+            argumentTo.SetValue(dst, argumentFrom.GetValue(src));*/
+
             return null;
         }
     }
