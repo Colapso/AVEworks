@@ -50,7 +50,11 @@
     <Compile Include="AutoMapper.cs" />
     <Compile Include="IMapper.cs" />
     <Compile Include="Mapping.cs" />
-    <Compile Include="MixedIfo.cs" />
+    <Compile Include="MappingCustomAttributes.cs" />
+    <Compile Include="MappingFields.cs" />
+    <Compile Include="MappingPropreties.cs" />
+    <Compile Include="MapFieldsInfo.cs" />
+    <Compile Include="MapPropertiesInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,3 +10,9 @@ C:\Users\gonca\Desktop\Serie1\MapperReflect\bin\Debug\MapperReflect.pdb
 C:\Users\gonca\Desktop\Serie1\MapperReflect\obj\Debug\MapperReflect.csprojResolveAssemblyReference.cache
 C:\Users\gonca\Desktop\Serie1\MapperReflect\obj\Debug\MapperReflect.dll
 C:\Users\gonca\Desktop\Serie1\MapperReflect\obj\Debug\MapperReflect.pdb
+C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\Serie1\AVEworks\MapperReflect\obj\Debug\MapperReflect.csprojResolveAssemblyReference.cache
+C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\Serie1\AVEworks\MapperReflect\obj\Debug\MapperReflect.dll
+C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\Serie1\AVEworks\MapperReflect\obj\Debug\MapperReflect.pdb
+C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\Serie1\AVEworks\MapperReflect\bin\Debug\MapperReflect.dll.config
+C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\Serie1\AVEworks\MapperReflect\bin\Debug\MapperReflect.dll
+C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\Serie1\AVEworks\MapperReflect\bin\Debug\MapperReflect.pdb
