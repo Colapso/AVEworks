@@ -44,9 +44,11 @@ namespace MapperReflect
         {
             foreach (FieldInfo i in fields.srcFieldInfo)
             {
+                String name = i.Name.Split('<')[1].Split('>')[0];
                 foreach (FieldInfo k in fields.dstFieldInfo)
                 {
-                       if (i.Name.Equals(nameFrom))
+                    String name2 = k.Name.Split('<')[1].Split('>')[0];
+                    if (name.Equals(nameFrom) && name2.Equals(nameDest))
                        {
                            allFields.Add(nameDest, new FieldInfoSrcDst(i, k));
                        }

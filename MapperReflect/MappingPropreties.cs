@@ -36,7 +36,19 @@ namespace MapperReflect
 
         public override void MatchAttrib(string nameFrom, string nameDest)
         {
-            throw new NotImplementedException();
+            foreach (PropertyInfo i in properties.srcPropertyInfo)
+            {
+                String name = i.Name.Split('<')[1].Split('>')[0];
+                foreach (PropertyInfo k in properties.dstPropertyInfo)
+                {
+                    String name2 = k.Name.Split('<')[1].Split('>')[0];
+                    if (name.Equals(nameFrom) && name2.Equals(nameDest))
+                    {
+                        allFields.Add(nameDest, new PropertyInfoSrcDst(i, k));
+                    }
+
+                }
+            }
         }
 
         internal override void fillDictionary(Type klassSrc, Type klassDest)
