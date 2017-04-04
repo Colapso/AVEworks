@@ -6,8 +6,34 @@ namespace MapperReflect
 {
     public class MappingFields : Mapping
     {
+        class FieldInfoSrcDst
+        {
+            public FieldInfo src { get; set; }
+            public FieldInfo dst { get; set; }
+            public FieldInfoSrcDst(FieldInfo src, FieldInfo dst)
+            {
+                this.src = src;
+                this.dst = dst;
+            }
+        }
 
-        public MapFieldsInfo fields { get; set; }
+        class MapFieldsInfo
+        {
+            public Type src { get; }
+            public Type dst { get; }
+            public FieldInfo[] srcFieldInfo { get; }
+            public FieldInfo[] dstFieldInfo { get; }
+
+            public MapFieldsInfo(Type klasssrc, Type klassdst)
+            {
+                src = klasssrc;
+                dst = klassdst;
+                srcFieldInfo = klasssrc.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                dstFieldInfo = klassdst.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+            }
+
+        }
+        MapFieldsInfo fields;
         Dictionary<string, FieldInfoSrcDst> allFields = new Dictionary<string, FieldInfoSrcDst>();
         private object obj,objSrc;
 
@@ -68,7 +94,8 @@ namespace MapperReflect
                     {
                         if (i.Name.Equals(k.Name))
                         {
-                            allFields.Add(k.Name, new FieldInfoSrcDst(i,k));
+                            if (!allFields.ContainsKey(k.Name))
+                                allFields.Add(k.Name, new FieldInfoSrcDst(i,k));
                         }
                     }
                 }

@@ -61,7 +61,8 @@ namespace MapperReflect
                     if (i.PropertyType.Equals(k.PropertyType))
                     {
                         if (i.Name.Equals(k.Name))
-                            allFields.Add(k.Name, new PropertyInfoSrcDst(i, k));
+                            if(!allFields.ContainsKey(k.Name))
+                                allFields.Add(k.Name, new PropertyInfoSrcDst(i, k));
                     }
                 }
             }

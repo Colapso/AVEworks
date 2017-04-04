@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PropertyInfoSrcDst.cs" />
-    <Compile Include="FieldInfoSrcDst.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="AutoMapper.cs" />
     <Compile Include="IMapper.cs" />
@@ -55,7 +54,6 @@
     <Compile Include="MappingCustomAttributes.cs" />
     <Compile Include="MappingFields.cs" />
     <Compile Include="MappingPropreties.cs" />
-    <Compile Include="MapFieldsInfo.cs" />
     <Compile Include="MapPropertiesInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
