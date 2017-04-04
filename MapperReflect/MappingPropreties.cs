@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace MapperReflect
@@ -6,6 +7,8 @@ namespace MapperReflect
     public class MappingPropreties : Mapping
     {
         public MapPropertiesInfo properties { get; set; }
+        Dictionary<string, PropertyInfoSrcDst> allFields = new Dictionary<string, PropertyInfoSrcDst>();
+
         public MappingPropreties()
         {
         }
@@ -20,20 +23,13 @@ namespace MapperReflect
 
         public override object getMappedObject(object src)
         {
-            if (properties == null)
-                properties = new MapPropertiesInfo(srcType, dstType);
+
 
             object ret = Activator.CreateInstance(properties.dst);
-            foreach (PropertyInfo i in properties.srcPropertyInfo)
+            foreach (string key in allFields.Keys)
             {
-                foreach (PropertyInfo k in properties.dstPropertyInfo)
-                {
-                    if (i.PropertyType.Equals(k.PropertyType))
-                    {
-                        if (i.Name.Equals(k.Name))
-                            k.SetValue(ret, i.GetValue(src));
-                    }
-                }
+                PropertyInfoSrcDst value = allFields[key];
+                value.dst.SetValue(ret, value.src.GetValue(src));
             }
             return ret;
         }
@@ -45,7 +41,18 @@ namespace MapperReflect
 
         internal override void fillDictionary(Type klassSrc, Type klassDest)
         {
-            throw new NotImplementedException();
+            properties = new MapPropertiesInfo(klassSrc, klassDest);
+            foreach (PropertyInfo i in properties.srcPropertyInfo)
+            {
+                foreach (PropertyInfo k in properties.dstPropertyInfo)
+                {
+                    if (i.PropertyType.Equals(k.PropertyType))
+                    {
+                        if (i.Name.Equals(k.Name))
+                            allFields.Add(k.Name, new PropertyInfoSrcDst(i, k));
+                    }
+                }
+            }
         }
     }
 }

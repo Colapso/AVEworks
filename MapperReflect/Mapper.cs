@@ -10,7 +10,7 @@ namespace MapperReflect
 {
     public class Mapper : IMapper
     {
-        //Dictionary<String,MapFieldsInfo> map = new Dictionary<String,MapFieldsInfo>(); //map key = type of soucer
+       
         Mapping mapping = Mapping.Properties;
         private Type tSrc;
         private Type tDst;
@@ -19,7 +19,9 @@ namespace MapperReflect
         {
             tSrc = klassSrc;
             tDst = klassDest;
-            //mapping.fillDictionary(klassSrc, klassDest);
+            mapping.dstType = tDst;
+            mapping.srcType = tSrc;
+            mapping.fillDictionary(klassSrc, klassDest);
         }
 
         public object[] Map(object[] src)
@@ -29,14 +31,16 @@ namespace MapperReflect
         
         public object Map(object src)
         {
-            mapping.dstType = tDst;
-            mapping.srcType = tSrc;
+            
             return mapping.getMappedObject(src);     
         }
 
         public Mapper Bind(Mapping m)
         {
             mapping = m;
+            mapping.dstType = tDst;
+            mapping.srcType = tSrc;
+            mapping.fillDictionary(tSrc, tDst);
             return this;
         }
 

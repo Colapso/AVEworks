@@ -8,7 +8,7 @@ namespace MapperReflect
     {
 
         public MapFieldsInfo fields { get; set; }
-        Dictionary<string, FieldInfo> allFields = new Dictionary<string, FieldInfo>();
+        Dictionary<string, FieldInfoSrcDst> allFields = new Dictionary<string, FieldInfoSrcDst>();
         private object obj,objSrc;
 
         public MappingFields()
@@ -27,10 +27,37 @@ namespace MapperReflect
         public override object getMappedObject(object src)
         {
             objSrc = src;
-            if(fields==null)
-                fields = new MapFieldsInfo(srcType, dstType);
+ 
+                
 
             object ret = Activator.CreateInstance(fields.dst);
+            foreach(string key in allFields.Keys)
+            {
+                FieldInfoSrcDst value = allFields[key];
+                value.dst.SetValue(ret, value.src.GetValue(src));
+            }
+            obj = ret;
+            return ret;
+        }
+
+        public override void MatchAttrib(string nameFrom, string nameDest)
+        {
+            foreach (FieldInfo i in fields.srcFieldInfo)
+            {
+                foreach (FieldInfo k in fields.dstFieldInfo)
+                {
+                       if (i.Name.Equals(nameFrom))
+                       {
+                           allFields.Add(nameDest, new FieldInfoSrcDst(i, k));
+                       }
+                    
+                }
+            }
+        }
+
+        internal override void fillDictionary(Type klassSrc, Type klassDest)
+        {
+            fields = new MapFieldsInfo(klassSrc, klassDest);
             foreach (FieldInfo i in fields.srcFieldInfo)
             {
                 foreach (FieldInfo k in fields.dstFieldInfo)
@@ -39,36 +66,11 @@ namespace MapperReflect
                     {
                         if (i.Name.Equals(k.Name))
                         {
-                            k.SetValue(ret, i.GetValue(src));
-                            allFields.Add(i.Name, k);
+                            allFields.Add(k.Name, new FieldInfoSrcDst(i,k));
                         }
-                            
                     }
                 }
             }
-            obj = ret;
-            return ret;
-        }
-
-        public override void MatchAttrib(string nameFrom, string nameDest)
-        {
-            //Não funciona porque o allFields ainda não está construído
-            //Solução: Quando é criado o Mapping, construir logo o dicionário (no set dos types)
-            //e assim o Match e o Map podem basear-se apenas no dicionário
-            foreach (KeyValuePair<string, FieldInfo> entry in allFields)
-            {
-                if (entry.Value.Name.Equals(nameFrom))
-                {
-                    allFields.Add(nameDest,entry.Value);
-                    return;
-                }
-            }
-            
-        }
-
-        internal override void fillDictionary(Type klassSrc, Type klassDest)
-        {
-            throw new NotImplementedException();
         }
     }
 
