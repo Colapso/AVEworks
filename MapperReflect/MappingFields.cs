@@ -65,6 +65,11 @@ namespace MapperReflect
             }
             
         }
+
+        internal override void fillDictionary(Type klassSrc, Type klassDest)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     

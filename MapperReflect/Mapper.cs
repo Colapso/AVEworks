@@ -19,6 +19,7 @@ namespace MapperReflect
         {
             tSrc = klassSrc;
             tDst = klassDest;
+            //mapping.fillDictionary(klassSrc, klassDest);
         }
 
         public object[] Map(object[] src)
