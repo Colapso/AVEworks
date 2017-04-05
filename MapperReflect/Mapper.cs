@@ -12,6 +12,7 @@ namespace MapperReflect
     {
        
         Mapping mapping = Mapping.Properties;
+        //MappingPropreties mappingProperties;
         private Type tSrc;
         private Type tDst;
 
@@ -19,14 +20,18 @@ namespace MapperReflect
         {
             tSrc = klassSrc;
             tDst = klassDest;
-            mapping.dstType = tDst;
-            mapping.srcType = tSrc;
-            mapping.fillDictionary(klassSrc, klassDest);
+            mapping = new MappingPropreties(klassSrc, klassDest);
+            
         }
 
         public object[] Map(object[] src)
         {
-            throw new NotImplementedException();
+            object[] ret = new object[src.Length];
+            for(int i = 0; i< ret.Length; i++)
+            {
+                ret[i] = mapping.getMappedObject(src[i]);
+            }
+            return ret;
         }
         
         public object Map(object src)
@@ -38,9 +43,11 @@ namespace MapperReflect
         public Mapper Bind(Mapping m)
         {
             mapping = m;
+           // if (mapping.GetType() == typeof(MappingFields))
+                
             mapping.dstType = tDst;
             mapping.srcType = tSrc;
-            mapping.fillDictionary(tSrc, tDst);
+            mapping.fillDictionary();
             return this;
         }
 

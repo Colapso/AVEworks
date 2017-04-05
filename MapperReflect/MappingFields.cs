@@ -6,36 +6,9 @@ namespace MapperReflect
 {
     public class MappingFields : Mapping
     {
-        class FieldInfoSrcDst
-        {
-            public FieldInfo src { get; set; }
-            public FieldInfo dst { get; set; }
-            public FieldInfoSrcDst(FieldInfo src, FieldInfo dst)
-            {
-                this.src = src;
-                this.dst = dst;
-            }
-        }
-
-        class MapFieldsInfo
-        {
-            public Type src { get; }
-            public Type dst { get; }
-            public FieldInfo[] srcFieldInfo { get; }
-            public FieldInfo[] dstFieldInfo { get; }
-
-            public MapFieldsInfo(Type klasssrc, Type klassdst)
-            {
-                src = klasssrc;
-                dst = klassdst;
-                srcFieldInfo = klasssrc.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                dstFieldInfo = klassdst.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-            }
-
-        }
-        MapFieldsInfo fields;
-        Dictionary<string, FieldInfoSrcDst> allFields = new Dictionary<string, FieldInfoSrcDst>();
-        private object obj,objSrc;
+        //public MapFieldsInfo fields { get; set; }
+        Dictionary<string, MapFieldsInfo> allFields = new Dictionary<string, MapFieldsInfo>();
+       
 
         public MappingFields()
         {
@@ -45,63 +18,43 @@ namespace MapperReflect
         {
             this.srcType = klasssrc;
             this.dstType = klassdst;
-            fields = new MapFieldsInfo(klasssrc, klassdst);
+            MapFieldsInfo fields = new MapFieldsInfo(klasssrc, klassdst);
+            allFields.Add(klasssrc.Name, fields);
+            allFields[srcType.Name].correspondentIndex();
 
         }
 
-        
+
         public override object getMappedObject(object src)
         {
-            objSrc = src;
- 
-                
+            MapFieldsInfo value;
+            List<int[]> listOfFields = allFields[src.GetType().Name].listOfFields;
 
-            object ret = Activator.CreateInstance(fields.dst);
-            foreach(string key in allFields.Keys)
+            object ret = Activator.CreateInstance(dstType);
+
+            value = allFields[src.GetType().Name];
+            
+            foreach(int[] indexs in listOfFields)
             {
-                FieldInfoSrcDst value = allFields[key];
-                value.dst.SetValue(ret, value.src.GetValue(src));
+                int indexOfSrcFields = indexs[0];
+                int indexOfDstFields = indexs[1];
+                value.dstFieldInfo[indexOfDstFields].SetValue(ret, value.srcFieldInfo[indexOfSrcFields].GetValue(src));
             }
-            obj = ret;
+            
             return ret;
         }
 
         public override void MatchAttrib(string nameFrom, string nameDest)
         {
-            foreach (FieldInfo i in fields.srcFieldInfo)
-            {
-                String name = i.Name.Split('<')[1].Split('>')[0];
-                foreach (FieldInfo k in fields.dstFieldInfo)
-                {
-                    String name2 = k.Name.Split('<')[1].Split('>')[0];
-                    if (name.Equals(nameFrom) && name2.Equals(nameDest))
-                       {
-                           allFields.Add(nameDest, new FieldInfoSrcDst(i, k));
-                       }
-                    
-                }
-            }
+            allFields[srcType.Name].addCorrespondentIndex(nameFrom, nameDest);
         }
 
-        internal override void fillDictionary(Type klassSrc, Type klassDest)
+        public override void fillDictionary()
         {
-            fields = new MapFieldsInfo(klassSrc, klassDest);
-            foreach (FieldInfo i in fields.srcFieldInfo)
-            {
-                foreach (FieldInfo k in fields.dstFieldInfo)
-                {
-                    if (i.FieldType.Equals(k.FieldType))
-                    {
-                        if (i.Name.Equals(k.Name))
-                        {
-                            if (!allFields.ContainsKey(k.Name))
-                                allFields.Add(k.Name, new FieldInfoSrcDst(i,k));
-                        }
-                    }
-                }
-            }
+            allFields.Add(srcType.Name, new MapFieldsInfo(srcType, dstType));
+            allFields[srcType.Name].correspondentIndex();
         }
-    }
+          }
 
     
 }

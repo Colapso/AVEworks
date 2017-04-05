@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PropertyInfoSrcDst.cs" />
+    <Compile Include="MapFieldsInfo.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="AutoMapper.cs" />
     <Compile Include="IMapper.cs" />

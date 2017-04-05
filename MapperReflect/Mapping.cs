@@ -20,6 +20,6 @@ namespace MapperReflect
         public abstract object getMappedObject(object src);
 
         public abstract void MatchAttrib(string nameFrom, string nameDest);
-        internal abstract void fillDictionary(Type klassSrc, Type klassDest);
+        public abstract void fillDictionary();
     }
 }

@@ -20,9 +20,9 @@ namespace MapperReflect
             throw new NotImplementedException();
         }
 
-        internal override void fillDictionary(Type klassSrc, Type klassDest)
+        public override void fillDictionary()
         {
-            throw new NotImplementedException();
-        }
+       throw new NotImplementedException();
+      }
     }
 }

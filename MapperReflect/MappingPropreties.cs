@@ -7,7 +7,7 @@ namespace MapperReflect
     public class MappingPropreties : Mapping
     {
         public MapPropertiesInfo properties { get; set; }
-        Dictionary<string, PropertyInfoSrcDst> allFields = new Dictionary<string, PropertyInfoSrcDst>();
+        Dictionary<string, MapPropertiesInfo> allFields = new Dictionary<string, MapPropertiesInfo>();
 
         public MappingPropreties()
         {
@@ -17,55 +17,43 @@ namespace MapperReflect
         {
             this.srcType = klasssrc;
             this.dstType = klassdst;
-            properties = new MapPropertiesInfo(klasssrc, klassdst);
+            MapPropertiesInfo properties = new MapPropertiesInfo(klasssrc, klassdst);
+            allFields.Add(klasssrc.Name, properties);
+            allFields[srcType.Name].correspondentIndex();
 
         }
 
         public override object getMappedObject(object src)
         {
+            MapPropertiesInfo value;
+            List<int[]> listOfFields = allFields[src.GetType().Name].listOfProperties;
 
+            object ret = Activator.CreateInstance(dstType);
 
-            object ret = Activator.CreateInstance(properties.dst);
-            foreach (string key in allFields.Keys)
+            value = allFields[src.GetType().Name];
+
+            foreach (int[] indexs in listOfFields)
             {
-                PropertyInfoSrcDst value = allFields[key];
-                value.dst.SetValue(ret, value.src.GetValue(src));
+                int indexOfSrcFields = indexs[0];
+                int indexOfDstFields = indexs[1];
+                value.dstPropertyInfo[indexOfDstFields].SetValue(ret, value.srcPropertyInfo[indexOfSrcFields].GetValue(src));
             }
+
             return ret;
         }
 
         public override void MatchAttrib(string nameFrom, string nameDest)
         {
-            foreach (PropertyInfo i in properties.srcPropertyInfo)
-            {
-                String name = i.Name.Split('<')[1].Split('>')[0];
-                foreach (PropertyInfo k in properties.dstPropertyInfo)
-                {
-                    String name2 = k.Name.Split('<')[1].Split('>')[0];
-                    if (name.Equals(nameFrom) && name2.Equals(nameDest))
-                    {
-                        allFields.Add(nameDest, new PropertyInfoSrcDst(i, k));
-                    }
 
-                }
-            }
+
+            allFields[srcType.Name].addCorrespondentIndex(nameFrom, nameDest);
         }
-
-        internal override void fillDictionary(Type klassSrc, Type klassDest)
+           
+                
+        public override void fillDictionary()
         {
-            properties = new MapPropertiesInfo(klassSrc, klassDest);
-            foreach (PropertyInfo i in properties.srcPropertyInfo)
-            {
-                foreach (PropertyInfo k in properties.dstPropertyInfo)
-                {
-                    if (i.PropertyType.Equals(k.PropertyType))
-                    {
-                        if (i.Name.Equals(k.Name))
-                            if(!allFields.ContainsKey(k.Name))
-                                allFields.Add(k.Name, new PropertyInfoSrcDst(i, k));
-                    }
-                }
-            }
+            allFields.Add(srcType.Name, new MapPropertiesInfo(srcType,dstType));
+            allFields[srcType.Name].correspondentIndex();
         }
     }
 }

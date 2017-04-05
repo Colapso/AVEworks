@@ -34,3 +34,13 @@ C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\Serie1\AVEworks\MapperReflectTests\b
 C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\Serie1\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.csprojResolveAssemblyReference.cache
 C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\Serie1\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.dll
 C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\Serie1\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.pdb
+C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperReflectTests\bin\Debug\MapperReflectTests.dll.config
+C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperReflectTests\bin\Debug\MapperReflectTests.dll
+C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperReflectTests\bin\Debug\MapperReflectTests.pdb
+C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperReflectTests\bin\Debug\MapperReflect.dll
+C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperReflectTests\bin\Debug\nunit.framework.dll
+C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperReflectTests\bin\Debug\MapperReflect.pdb
+C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperReflectTests\bin\Debug\nunit.framework.xml
+C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.csprojResolveAssemblyReference.cache
+C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.dll
+C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.pdb
