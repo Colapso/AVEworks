@@ -49,18 +49,30 @@ namespace MapperReflectTests
             Mapper m = AutoMapper
             .Build(typeof(Student), typeof(Person))
             .Bind(Mapping.Fields)
-            .Match("Nr", "Id");
-            //.Match("Courses", "Subjects");
+            .Match("Nr", "Id")
+            .Match("Courses", "Subjects");
             Student[] stds = { new Student { Nr = 42929, Name = "Gonçalo Barros" }, new Student { Nr = 42144, Name = "Nuno Cardoso" }, new Student { Nr = 42140, Name = "Marco Agostinho" } };
+            stds[0].Courses[0] = new Course("AVE");
+            stds[1].Courses[0] = new Course("LS");
+            stds[2].Courses[0] = new Course("POO");
             object[] ps =m.Map(stds);
             Person[] pso = new Person[ps.Length];
-            for(int i = 0; i< stds.Length; i++)
+            
+            for (int i = 0; i< stds.Length; i++)
             {
                 pso[i] = (Person)ps[i];
                 Assert.AreEqual(stds[i].Nr, pso[i].Id);
             }
         }
+        [Test]
+        public void testoMap()
 
+        {
+            IMapper m = AutoMapper.Build(typeof(Student), typeof(Person)).Bind(new MappingCustomAttributes(typeof(ToMapAttribute)));
+            Student s = new Student { Nr = 27721, Name = "Ze Manel" };
+            Person p = (Person)m.Map(s);
+            Assert.AreEqual(s.Name, p.Name);
+        }
 
 
     } 

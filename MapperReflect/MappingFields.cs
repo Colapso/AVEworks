@@ -38,7 +38,21 @@ namespace MapperReflect
             {
                 int indexOfSrcFields = indexs[0];
                 int indexOfDstFields = indexs[1];
-                value.dstFieldInfo[indexOfDstFields].SetValue(ret, value.srcFieldInfo[indexOfSrcFields].GetValue(src));
+                object xa;
+                
+
+                if (value.dstFieldInfo[indexOfDstFields].FieldType.Equals(value.srcFieldInfo[indexOfSrcFields].FieldType))
+                {
+                    
+                    value.dstFieldInfo[indexOfDstFields].SetValue(ret, value.srcFieldInfo[indexOfSrcFields].GetValue(src));
+                }
+                else
+                {
+                    Mapper m = AutoMapper.Build(value.dstFieldInfo[indexOfDstFields].FieldType, value.srcFieldInfo[indexOfSrcFields].FieldType)
+                        .Bind(Mapping.Fields);
+                    xa = value.srcFieldInfo[indexOfSrcFields].GetValue(src);
+                    value.dstFieldInfo[indexOfDstFields].SetValue(ret, m.Map(value.srcFieldInfo[indexOfSrcFields].GetValue(src)));
+                }
             }
             
             return ret;
@@ -51,8 +65,10 @@ namespace MapperReflect
 
         public override void fillDictionary()
         {
-            allFields.Add(srcType.Name, new MapFieldsInfo(srcType, dstType));
-            allFields[srcType.Name].correspondentIndex();
+            if(!allFields.ContainsKey(srcType.Name)) { 
+                allFields.Add(srcType.Name, new MapFieldsInfo(srcType, dstType));
+                allFields[srcType.Name].correspondentIndex();
+            }
         }
           }
 

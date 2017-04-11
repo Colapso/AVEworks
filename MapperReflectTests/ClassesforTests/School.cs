@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace MapperReflectTests.ClassesforTests
 {
-
-    class Person
+    class School
     {
         [ToMap(DefaultValue = "Undefined")]
-        public string Name { get; set; }
+        string Location { get; set; }
 
-        [ToMap(DefaultValueToInt = 0)]
-        public int Id { get; set; }
+        [ToMap(DefaultValue = "Undefined")]
+        string Name { get; set; }
 
-        public Subject[] Subjects {get; set; } 
+        int[] MembersId { get; set; }
     }
 }

@@ -50,8 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassesforTests\Course.cs" />
+    <Compile Include="ClassesforTests\Organization.cs" />
     <Compile Include="ClassesforTests\Person.cs" />
+    <Compile Include="ClassesforTests\School.cs" />
     <Compile Include="ClassesforTests\Student.cs" />
+    <Compile Include="ClassesforTests\Subject.cs" />
     <Compile Include="ClassesforTests\Teacher.cs" />
     <Compile Include="MapperReflectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

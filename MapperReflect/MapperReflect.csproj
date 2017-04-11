@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MapFieldsInfo.cs" />
+    <Compile Include="MapMembersInfo.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="AutoMapper.cs" />
     <Compile Include="IMapper.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="MappingPropreties.cs" />
     <Compile Include="MapPropertiesInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToMapAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -50,7 +50,6 @@ namespace MapperReflect
                     String name2 = dstPropertyInfo[k].Name.Split('<')[1].Split('>')[0];
                     if (name.Equals(nameFrom) && name2.Equals(nameDest))
                     {
-
                         listOfProperties.Add(new int[] { i, k });
                         return;
                     }

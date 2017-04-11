@@ -36,7 +36,16 @@ namespace MapperReflect
             {
                 int indexOfSrcFields = indexs[0];
                 int indexOfDstFields = indexs[1];
-                value.dstPropertyInfo[indexOfDstFields].SetValue(ret, value.srcPropertyInfo[indexOfSrcFields].GetValue(src));
+                
+
+                if (value.dstPropertyInfo[indexOfDstFields].GetType().Equals(value.srcPropertyInfo[indexOfSrcFields].GetType()))
+                    value.dstPropertyInfo[indexOfDstFields].SetValue(ret, value.srcPropertyInfo[indexOfSrcFields].GetValue(src));
+                else
+                {
+                    value.dstPropertyInfo[indexOfDstFields].SetValue(ret, AutoMapper.Build(value.dstPropertyInfo[indexOfDstFields].GetType(), value.srcPropertyInfo[indexOfSrcFields].GetType())
+                        .Bind(Mapping.Properties).Map(value.srcPropertyInfo[indexOfSrcFields].GetValue(src)));
+                }
+
             }
 
             return ret;
@@ -52,8 +61,10 @@ namespace MapperReflect
                 
         public override void fillDictionary()
         {
-            allFields.Add(srcType.Name, new MapPropertiesInfo(srcType,dstType));
-            allFields[srcType.Name].correspondentIndex();
+            if (!allFields.ContainsKey(srcType.Name)) { 
+                allFields.Add(srcType.Name, new MapPropertiesInfo(srcType,dstType));
+                allFields[srcType.Name].correspondentIndex();
+            }
         }
     }
 }
