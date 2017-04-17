@@ -46,18 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MapFieldsInfo.cs" />
-    <Compile Include="MapMembersInfo.cs" />
+    <Compile Include="MappingTypes\Utils\MapFieldsInfo.cs" />
+    <Compile Include="MappingTypes\Utils\MapMembersInfo.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="AutoMapper.cs" />
     <Compile Include="IMapper.cs" />
-    <Compile Include="Mapping.cs" />
-    <Compile Include="MappingCustomAttributes.cs" />
-    <Compile Include="MappingFields.cs" />
-    <Compile Include="MappingPropreties.cs" />
-    <Compile Include="MapPropertiesInfo.cs" />
+    <Compile Include="MappingTypes\Mapping.cs" />
+    <Compile Include="MappingTypes\MappingCustomAttributes.cs" />
+    <Compile Include="MappingTypes\MappingFields.cs" />
+    <Compile Include="MappingTypes\MappingPropreties.cs" />
+    <Compile Include="MappingTypes\Utils\MapPropertiesInfo.cs" />
+    <Compile Include="MappingTypes\Utils\MatchInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ToMapAttribute.cs" />
+    <Compile Include="MappingTypes\Utils\ToMapAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

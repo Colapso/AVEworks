@@ -16,6 +16,9 @@ namespace MapperReflectTests.ClassesforTests
         [ToMap(DefaultValueToInt = 0)]
         public int Id { get; set; }
 
-        public Subject[] Subjects {get; set; } 
+        public Subject[] Subjects {get; set; }
+
+
+        public Subject Subject { get; set; }
     }
 }

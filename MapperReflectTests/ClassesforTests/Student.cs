@@ -19,9 +19,12 @@ namespace MapperReflectTests.ClassesforTests
 
         public Course[] Courses { get; set; }
 
+
+        public Course Course { get; set; }
+
         public Student()
         {
-            Courses = new Course[1];
+
         }
     }
 }

@@ -2,11 +2,16 @@
 {
     public class Subject
     {
-        string name;
+        public string name { get; set; }
 
         public Subject(string n)
         {
             name = n;
+        }
+
+        public Subject()
+        {
+          
         }
     }
 }

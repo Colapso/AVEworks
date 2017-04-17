@@ -20,6 +20,11 @@ namespace MapperReflect
         public abstract object getMappedObject(object src);
 
         public abstract void MatchAttrib(string nameFrom, string nameDest);
-        public abstract void fillDictionary();
+        public abstract void actualizeInfo();
+
+        public static bool IsPrimitiveType(Type fieldType)
+        {
+            return fieldType.IsPrimitive || fieldType.Namespace.Equals("System");
+        }
     }
 }

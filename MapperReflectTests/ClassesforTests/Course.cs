@@ -2,10 +2,14 @@
 {
     public class Course
     {
-        string name;
+        public string name { get; set; }
         public Course(string nam)
         {
             name = nam;
+        }
+
+        public Course()
+        {
         }
     }
 }

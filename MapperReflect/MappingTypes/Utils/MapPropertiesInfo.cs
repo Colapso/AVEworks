@@ -10,7 +10,7 @@ namespace MapperReflect
         public Type dst { get; }
         public PropertyInfo[] srcPropertyInfo { get; }
         public PropertyInfo[] dstPropertyInfo { get; }
-        public List<int[]> listOfProperties = new List<int[]>();
+        public List<MatchInfo> listOfProperties = new List<MatchInfo>();
 
         public MapPropertiesInfo(Type klasssrc, Type klassdst)
         {
@@ -31,7 +31,7 @@ namespace MapperReflect
                     if (srcPropertyInfo[i].PropertyType.Equals(dstPropertyInfo[k].PropertyType))
                     {
                         if (srcPropertyInfo[i].Name.Equals(dstPropertyInfo[k].Name))
-                            listOfProperties.Add(new int[] { i, k });
+                            AddProperty(i,k);
                     }
 
                 }
@@ -44,19 +44,49 @@ namespace MapperReflect
 
             for (int i = 0; i < srcPropertyInfo.Length; i++)
             {
-                String name = srcPropertyInfo[i].Name.Split('<')[1].Split('>')[0];
+                string name = srcPropertyInfo[i].Name;
+
+                if (name.Contains("<") && name.Contains(">"))
+                    name = name.Split('<')[1].Split('>')[0];
+
                 for (int k = 0; k < dstPropertyInfo.Length; k++)
                 {
-                    String name2 = dstPropertyInfo[k].Name.Split('<')[1].Split('>')[0];
+                    string name2 = dstPropertyInfo[k].Name;
+
+                    if (name2.Contains("<") && name2.Contains(">"))
+                        name2 = name2.Split('<')[1].Split('>')[0];
+
                     if (name.Equals(nameFrom) && name2.Equals(nameDest))
                     {
-                        listOfProperties.Add(new int[] { i, k });
+                        AddProperty(i, k);
                         return;
                     }
                 }
 
             }
 
+        }
+   
+
+        private void AddProperty(int srci, int dsti)
+        {
+            MatchInfo m = new MatchInfo(srci, dsti);
+
+            Type src = srcPropertyInfo[srci].PropertyType;
+            Type dst = dstPropertyInfo[dsti].PropertyType;
+
+            if (src.IsArray && dst.IsArray)
+            {
+                src = src.GetElementType();
+                dst = dst.GetElementType();
+            }
+
+            if (!IsPrimitiveType(src))
+            {
+                m.MapperAux = AutoMapper.Build(src, dst).Bind(new MappingPropreties());
+            }
+
+            listOfProperties.Add(m);
         }
     }
 }

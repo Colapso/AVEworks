@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace MapperReflect
 {
+
     public class MapFieldsInfo : MappingFields
     {
         public Type src { get; }
         public Type dst { get; }
         public FieldInfo[] srcFieldInfo { get; }
         public FieldInfo[] dstFieldInfo { get; }
-        public List<int[]> listOfFields = new List<int[]>(); 
+        public List<MatchInfo> listOfFields = new List<MatchInfo>(); 
 
         public MapFieldsInfo(Type klasssrc, Type klassdst)
         {
@@ -23,10 +24,29 @@ namespace MapperReflect
             dstFieldInfo = klassdst.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
         }
 
+        private void AddField(int srci, int dsti)
+        {
+            MatchInfo m = new MatchInfo(srci, dsti);
+
+            Type src = srcFieldInfo[srci].FieldType;
+            Type dst = dstFieldInfo[dsti].FieldType;
+
+            if (src.IsArray && dst.IsArray)
+            {
+                src = src.GetElementType();
+                dst = dst.GetElementType();
+            }
+
+            if (!IsPrimitiveType(src))
+            {
+                m.MapperAux = AutoMapper.Build(src, dst).Bind(new MappingFields());
+            }
+
+            listOfFields.Add(m);
+        }
+
         public void correspondentIndex()
         {
-
-
             for(int i = 0; i < srcFieldInfo.Length;i++ )
             {
                 for (int k = 0; k < dstFieldInfo.Length; k++)
@@ -34,7 +54,9 @@ namespace MapperReflect
                     if (srcFieldInfo[i].FieldType.Equals(dstFieldInfo[k].FieldType))
                     {
                         if (srcFieldInfo[i].Name.Equals(dstFieldInfo[k].Name))
-                            listOfFields.Add(new int[] { i, k });
+                        {
+                            AddField(i, k);
+                        }
                     }
 
                 }
@@ -42,26 +64,32 @@ namespace MapperReflect
             }
         }
 
-        public void addCorrespondentIndex(string nameFrom,string nameDest)
+        public void addCorrespondentIndex(string nameFrom, string nameDest)
         {
 
             for (int i = 0; i < srcFieldInfo.Length; i++)
             {
-                String name = srcFieldInfo[i].Name.Split('<')[1].Split('>')[0];
+                string name = srcFieldInfo[i].Name;
+
+                if(name.Contains("<") && name.Contains(">"))
+                    name = name.Split('<')[1].Split('>')[0];
+
                 for (int k = 0; k < dstFieldInfo.Length; k++)
                 {
-                    String name2 = dstFieldInfo[k].Name.Split('<')[1].Split('>')[0];
-                    if (name.Equals(nameFrom) && name2.Equals(nameDest)) { 
+                    string name2 = dstFieldInfo[k].Name;
+
+                    if (name2.Contains("<") && name2.Contains(">"))
+                        name2 = name2.Split('<')[1].Split('>')[0];
                     
-                        listOfFields.Add(new int[] { i, k });
+                    if (name.Equals(nameFrom) && name2.Equals(nameDest))
+                    {
+                        AddField(i, k);
                         return;
                     }
                 }
 
             }
-            
-        }
 
-    
+        }
     }
 }
