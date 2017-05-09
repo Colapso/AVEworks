@@ -54,3 +54,13 @@ C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\AVEworks\MapperReflectTests\bin\Debu
 C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.csprojResolveAssemblyReference.cache
 C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.dll
 C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.pdb
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflectTests\bin\Debug\MapperReflectTests.dll.config
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflectTests\bin\Debug\MapperReflectTests.dll
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflectTests\bin\Debug\MapperReflectTests.pdb
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflectTests\bin\Debug\MapperReflect.dll
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflectTests\bin\Debug\nunit.framework.dll
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflectTests\bin\Debug\MapperReflect.pdb
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflectTests\bin\Debug\nunit.framework.xml
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.csprojResolveAssemblyReference.cache
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.dll
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflectTests\obj\Debug\MapperReflectTests.pdb

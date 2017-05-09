@@ -1,10 +1,12 @@
-﻿using System;
+﻿using MapperReflect;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Reflection.Emit;
 
-namespace MapperReflect
+namespace MapperReflectTests
 {
-    public class MapPropertiesInfo : MappingPropreties
+    internal class MapEmitInfo : MappingEmit
     {
         public Type src { get; }
         public Type dst { get; }
@@ -12,7 +14,7 @@ namespace MapperReflect
         public PropertyInfo[] dstPropertyInfo { get; }
         public List<MatchInfo> listOfProperties = new List<MatchInfo>();
 
-        public MapPropertiesInfo(Type klasssrc, Type klassdst)
+        public MapEmitInfo(Type klasssrc, Type klassdst)
         {
             src = klasssrc;
             dst = klassdst;
@@ -20,7 +22,40 @@ namespace MapperReflect
             dstPropertyInfo = klassdst.GetProperties();
         }
 
-        public void correspondentIndex()
+        internal object Copy(object s)
+        {
+            const string asmName = "DynamicCopy";
+            AssemblyBuilder asm = CreateAsm(asmName);
+            ModuleBuilder moduleBuilder = asm.DefineDynamicModule(asmName + ".dll");
+            
+            TypeBuilder typeBuilder = moduleBuilder.DefineType("DynamicCopy", TypeAttributes.Public, typeof(object), new Type[] { typeof(ICopier)});
+            MethodBuilder methodBuilder = typeBuilder.DefineMethod("CopyDynamically", MethodAttributes.Public | MethodAttributes.ReuseSlot, typeof(object), new Type[] { dst });
+            
+            ILGenerator ilGenerator = methodBuilder.GetILGenerator();
+            ConstructorInfo constr = dst.GetConstructor(Type.EmptyTypes);
+
+            ilGenerator.Emit(OpCodes.Newobj, constr);
+            foreach(MatchInfo m in listOfProperties)
+            {
+                //copy values
+            }
+            ilGenerator.Emit(OpCodes.Ret);
+            
+            Type dinamicCreateType = typeBuilder.CreateType();
+            ICopier dinamicCreate = (ICopier)Activator.CreateInstance(dinamicCreateType);
+            
+            asm.Save(asmName + ".dll");
+            return dinamicCreate.Copy(dst);
+        }
+
+        private AssemblyBuilder CreateAsm(string name)
+         {
+             AssemblyName nameAsm = new AssemblyName(name);
+             AssemblyBuilder builderAsm = AssemblyBuilder.DefineDynamicAssembly(nameAsm, AssemblyBuilderAccess.RunAndSave);
+             return builderAsm;
+         }
+
+    public void correspondentIndex()
         {
             for (int i = 0; i < srcPropertyInfo.Length; i++)
             {
@@ -29,7 +64,7 @@ namespace MapperReflect
                     if (srcPropertyInfo[i].PropertyType.Equals(dstPropertyInfo[k].PropertyType))
                     {
                         if (srcPropertyInfo[i].Name.Equals(dstPropertyInfo[k].Name))
-                            AddProperty(i,k);
+                            AddProperty(i, k);
                     }
 
                 }
@@ -64,7 +99,7 @@ namespace MapperReflect
             }
 
         }
-   
+
 
         private void AddProperty(int srci, int dsti)
         {
@@ -86,5 +121,10 @@ namespace MapperReflect
 
             listOfProperties.Add(m);
         }
+    }
+
+    internal interface ICopier
+    {
+        object Copy(Object t);
     }
 }

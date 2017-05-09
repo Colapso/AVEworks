@@ -28,35 +28,28 @@ namespace MapperEmit
             return fieldType.IsPrimitive || fieldType.Namespace.Equals("System");
         }
 
-
-
-
-
-
-
-        private object CreateInstanceWithAssembly(Type tSrc,Type tDst)
+        public object CreateInstanceWithAssembly(Type tDst)
         {
             const string asmName = "DynamicCreate";
             AssemblyBuilder asm = CreateAsm(asmName);
             ModuleBuilder moduleBuilder = asm.DefineDynamicModule(asmName + ".dll");
 
-            TypeBuilder typeBuilder = moduleBuilder.DefineType("DynamicCreate",TypeAttributes.Public,typeof(object));
-            MethodBuilder methodBuilder = typeBuilder.DefineMethod("CreateInstance", MethodAttributes.Public | MethodAttributes.ReuseSlot,typeof(object),new Type[]{tDst});
+            TypeBuilder typeBuilder = moduleBuilder.DefineType("DynamicCreate",TypeAttributes.Public,typeof(object), new Type[] { typeof(DynamicCreater) });
+            MethodBuilder methodBuilder = typeBuilder.DefineMethod("CreateInstanceDyn", MethodAttributes.Public | MethodAttributes.ReuseSlot,typeof(object),new Type[]{tDst});
+            ConstructorInfo ctors = tDst.GetConstructor(Type.EmptyTypes);
+            ParameterInfo[] param = ctors.GetParameters();
+            Type[] paramT = new Type[param.Length];
+            for (int i = 0; i < param.Length; i++)
+            {
+                paramT[i] = param[i].Attributes.GetType();
+            }
 
             ILGenerator ilGenerator = methodBuilder.GetILGenerator();
-            
-
-
-
-
-
-
-
 
             ilGenerator.Emit(OpCodes.Ret);
 
             Type dinamicCreateType = typeBuilder.CreateType();
-            object dinamicCreate = Activator.CreateInstance(dinamicCreateType);
+            DynamicCreater dinamicCreate = (DynamicCreater) Activator.CreateInstance(dinamicCreateType);
 
             asm.Save(asmName + ".dll");
 
@@ -70,11 +63,11 @@ namespace MapperEmit
             return builderAsm;
         }
 
+    }
 
-
-
-
-
-
+    interface DynamicCreater
+    {
+        object CreateInstanceDyn(Type t);
     }
 }
+ 

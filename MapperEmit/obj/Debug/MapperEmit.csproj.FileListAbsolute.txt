@@ -1,1 +1,2 @@
 C:\Users\gonca\Desktop\1SAVE\AVEworks\MapperEmit\obj\Debug\MapperEmit.csprojResolveAssemblyReference.cache
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperEmit\obj\Debug\MapperEmit.csprojResolveAssemblyReference.cache

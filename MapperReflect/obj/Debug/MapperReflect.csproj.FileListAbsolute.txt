@@ -28,3 +28,9 @@ C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\AVEworks\MapperReflect\bin\Debug\Map
 C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\AVEworks\MapperReflect\obj\Debug\MapperReflect.dll
 C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\AVEworks\MapperReflect\obj\Debug\MapperReflect.pdb
 C:\Users\Nuno Cardoso\Desktop\AVE\Trabalhos\AVEworks\MapperReflect\obj\Debug\MapperReflect.csprojResolveAssemblyReference.cache
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflect\bin\Debug\MapperReflect.dll.config
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflect\bin\Debug\MapperReflect.dll
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflect\bin\Debug\MapperReflect.pdb
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflect\obj\Debug\MapperReflect.csprojResolveAssemblyReference.cache
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflect\obj\Debug\MapperReflect.dll
+C:\Users\BitoEngineer\Desktop\Faculdade\AVE\Trabalhos\Serie 2\AVEworks\MapperReflect\obj\Debug\MapperReflect.pdb

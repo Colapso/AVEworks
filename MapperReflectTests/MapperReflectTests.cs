@@ -92,5 +92,14 @@ namespace MapperReflectTests
             Assert.AreEqual(stds.Nr, pso.Id);
             Assert.AreEqual(stds.Course.name, pso.Subject.name);
         }
+
+        [Test]
+        public void testMapUsingEmit()
+        {
+            IMapper m = AutoMapper.Build(typeof(Student), typeof(Person)).Bind(new MappingEmit());
+            Student s = new Student { Nr = 27721, Name = "Ze Manel" };
+            Person p = (Person)m.Map(s);
+            Assert.AreEqual(s.Name, p.Name);
+        }
     }
 }
