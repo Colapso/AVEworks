@@ -21,7 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MappingTypes\Utils\MapEmitInfo.cs" />
+    <Compile Include="MappingTypes\MappingEmit.cs" />
     <Compile Include="MappingTypes\Utils\MapFieldsInfo.cs" />
     <Compile Include="MappingTypes\Utils\MapMembersInfo.cs" />
     <Compile Include="Mapper.cs" />

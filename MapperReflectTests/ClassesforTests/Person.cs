@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MapperReflectTests.ClassesforTests
 {
 
-    class Person
+    public class Person
     {
         [ToMap(DefaultValue = "Undefined")]
         public string Name { get; set; }

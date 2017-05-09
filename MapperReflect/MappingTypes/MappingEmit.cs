@@ -1,10 +1,10 @@
 ﻿using System;
 using MapperReflect;
-using MapperReflectTests.ClassesforTests;
 
-namespace MapperReflectTests
+
+namespace MapperReflect
 {
-    internal class MappingEmit : Mapping
+    public class MappingEmit : Mapping
     {
         MapEmitInfo emit { get; set; }
 
@@ -32,6 +32,7 @@ namespace MapperReflectTests
             /*Student s = (Student)src;
             StudentToPersonCopier sc = new StudentToPersonCopier();
             return sc.Copy(s);*/
+            
             return emit.Copy(src);
         }
 

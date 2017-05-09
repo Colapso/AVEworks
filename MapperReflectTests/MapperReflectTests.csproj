@@ -52,8 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassesforTests\Course.cs" />
-    <Compile Include="ClassesforTests\MapEmitInfo.cs" />
-    <Compile Include="ClassesforTests\MappingEmit.cs" />
     <Compile Include="ClassesforTests\Organization.cs" />
     <Compile Include="ClassesforTests\Person.cs" />
     <Compile Include="ClassesforTests\School.cs" />

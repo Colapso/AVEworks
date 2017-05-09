@@ -94,7 +94,16 @@ namespace MapperReflectTests
         }
 
         [Test]
-        public void testMapUsingEmit()
+        public void testMapUsingEmitConcrete()
+        {
+            IMapper m = AutoMapper.Build(typeof(Student), typeof(Person)).Bind(new MappingEmit());
+            Student s = new Student { Nr = 27721, Name = "Ze Manel" };
+            Person p = (Person)m.Map(s);
+            Assert.AreEqual(s.Name, p.Name);
+        }
+
+        [Test]
+        public void testMapUsingEmitSolid()
         {
             IMapper m = AutoMapper.Build(typeof(Student), typeof(Person)).Bind(new MappingEmit());
             Student s = new Student { Nr = 27721, Name = "Ze Manel" };
