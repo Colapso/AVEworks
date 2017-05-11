@@ -22,7 +22,7 @@ namespace MapperReflect
             dstPropertyInfo = klassdst.GetProperties();
         }
 
-        public object Copy(object s)
+        public ICopier Copy()
         {
             const string asmName = "DynamicCopy";
             AssemblyBuilder asm = CreateAsm(asmName);
@@ -52,7 +52,42 @@ namespace MapperReflect
             ICopier dinamicCreate = (ICopier)Activator.CreateInstance(dinamicCreateType);
             
             asm.Save(asmName + ".dll");
-            return dinamicCreate.CopyDynamically(s);
+            return dinamicCreate;
+        }
+
+        public ICopier CopyWithGenerics<TSrc,TDst>()
+        {
+            const string asmName = "DynamicCopy";
+            AssemblyBuilder asm = CreateAsm(asmName);
+            ModuleBuilder moduleBuilder = asm.DefineDynamicModule(asmName, asmName + ".dll");
+
+            TypeBuilder typeBuilder = moduleBuilder.DefineType("DynamicCopy", TypeAttributes.Public, typeof(object), new Type[] { typeof(ICopierGeneric<,>) });
+            MethodBuilder methodBuilder = typeBuilder.DefineMethod("CopyDynamically", MethodAttributes.Virtual | MethodAttributes.Public | MethodAttributes.ReuseSlot);
+            GenericTypeParameterBuilder[] parames=methodBuilder.DefineGenericParameters("TSrc");
+            methodBuilder.SetParameters(parames);
+            methodBuilder.SetReturnType(typeof(TDst));
+            ILGenerator ilGenerator = methodBuilder.GetILGenerator();
+            ConstructorInfo constr = typeof(TDst).GetConstructor(Type.EmptyTypes);
+            LocalBuilder result = ilGenerator.DeclareLocal(typeof(TDst));
+            ilGenerator.Emit(OpCodes.Newobj, constr);
+            ilGenerator.Emit(OpCodes.Stloc_0);
+            ilGenerator.Emit(OpCodes.Ldloc_0);
+            foreach (MatchInfo m in listOfProperties)
+            {
+                MethodInfo gSrc = srcPropertyInfo[m.SrcIdx].GetMethod;
+                MethodInfo sDst = dstPropertyInfo[m.DstIdx].SetMethod;
+                ilGenerator.Emit(OpCodes.Ldarg_1);
+                ilGenerator.Emit(OpCodes.Callvirt, gSrc);
+                ilGenerator.Emit(OpCodes.Callvirt, sDst);
+                ilGenerator.Emit(OpCodes.Ldloc_0);
+            }
+            ilGenerator.Emit(OpCodes.Ret);
+
+            Type dinamicCreateType = typeBuilder.CreateType();
+            ICopier dinamicCreate = (ICopier)Activator.CreateInstance(dinamicCreateType);
+
+            asm.Save(asmName + ".dll");
+            return dinamicCreate;
         }
 
         private AssemblyBuilder CreateAsm(string name)
@@ -133,5 +168,10 @@ namespace MapperReflect
     public interface ICopier
     {
         object CopyDynamically(object t);
+    }
+
+    public interface ICopierGeneric<TDst,TSrc>
+    {
+        TDst CopyDynamically(TSrc obj);
     }
 }

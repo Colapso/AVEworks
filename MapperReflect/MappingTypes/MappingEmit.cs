@@ -7,6 +7,7 @@ namespace MapperReflect
     public class MappingEmit : Mapping
     {
         MapEmitInfo emit { get; set; }
+        ICopier cop;
 
         public MappingEmit()
         {
@@ -29,16 +30,14 @@ namespace MapperReflect
 
         public override object getMappedObject(object src)
         {
-            /*Student s = (Student)src;
-            StudentToPersonCopier sc = new StudentToPersonCopier();
-            return sc.Copy(s);*/
-            
-            return emit.Copy(src);
+            if(cop==null)
+                cop= emit.CopyWithGenerics<srcType,dstType>();
+            return cop.CopyDynamically(src);
         }
 
         public override void MatchAttrib(string nameFrom, string nameDest)
         {
-            throw new NotImplementedException();
+            emit.addCorrespondentIndex(nameFrom, nameDest);
         }
     }
 }
