@@ -31,7 +31,7 @@ namespace MapperReflect
         public override object getMappedObject(object src)
         {
             if(cop==null)
-                cop= emit.CopyWithGenerics<srcType,dstType>();
+                cop= emit.Copy();
             return cop.CopyDynamically(src);
         }
 
@@ -39,5 +39,6 @@ namespace MapperReflect
         {
             emit.addCorrespondentIndex(nameFrom, nameDest);
         }
+
     }
 }

@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PerformanceTests.cs" />
     <Compile Include="ClassesforTests\Course.cs" />
     <Compile Include="ClassesforTests\Organization.cs" />
     <Compile Include="ClassesforTests\Person.cs" />
